@@ -48,7 +48,7 @@
                         "id": "3",
                         "params": {
                             "customLabel": "IOC Type",
-                            "field": "ioc.type",
+                            "field": "ioc.type.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -415,7 +415,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "Hostname",
-                            "field": "host.name",
+                            "field": "host.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -432,7 +432,7 @@
                         "id": "3",
                         "params": {
                             "customLabel": "Username",
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -500,7 +500,7 @@
                     "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.index",
                     "query": {
                         "language": "lucene",
-                        "query": "NOT (redir.backend.name: c2*)"
+                        "query": "NOT (redir.backend.name.keyword: c2*)"
                     }
                 }
             },
@@ -514,7 +514,7 @@
                         "id": "1",
                         "params": {
                             "customLabel": "Source IP",
-                            "field": "source.ip"
+                            "field": "source.ip.keyword"
                         },
                         "schema": "metric",
                         "type": "cardinality"
@@ -525,7 +525,7 @@
                         "params": {
                             "autoPrecision": true,
                             "customLabel": "",
-                            "field": "source.geo.location",
+                            "field": "source.geo.location.keyword",
                             "isFilteredByCollar": true,
                             "precision": 2,
                             "useGeocentroid": true
@@ -605,7 +605,7 @@
                     "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.index",
                     "query": {
                         "language": "lucene",
-                        "query": "(redir.backend.name: c2*)"
+                        "query": "(redir.backend.name.keyword: c2*)"
                     }
                 }
             },
@@ -619,7 +619,7 @@
                         "id": "1",
                         "params": {
                             "customLabel": "Source IP",
-                            "field": "source.ip"
+                            "field": "source.ip.keyword"
                         },
                         "schema": "metric",
                         "type": "cardinality"
@@ -630,7 +630,7 @@
                         "params": {
                             "autoPrecision": true,
                             "customLabel": "",
-                            "field": "source.geo.location",
+                            "field": "source.geo.location.keyword",
                             "isFilteredByCollar": true,
                             "precision": 2,
                             "useGeocentroid": true
@@ -732,7 +732,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "iplist.name",
+                            "field": "iplist.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -844,7 +844,7 @@
                         "enabled": true,
                         "id": "3",
                         "params": {
-                            "field": "signal.rule.threat.technique.name",
+                            "field": "signal.rule.threat.technique.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -1012,7 +1012,7 @@
                         "enabled": true,
                         "id": "3",
                         "params": {
-                            "field": "signal.rule.threat.tactic.name",
+                            "field": "signal.rule.threat.tactic.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -1161,7 +1161,7 @@
                         "enabled": true,
                         "id": "3",
                         "params": {
-                            "field": "iplist.source",
+                            "field": "iplist.source.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -1177,7 +1177,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "iplist.name",
+                            "field": "iplist.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -1365,7 +1365,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "IOC Types",
-                            "field": "ioc.type",
+                            "field": "ioc.type.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -1675,7 +1675,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "Downloads",
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -1784,7 +1784,7 @@
                         "id": "1",
                         "params": {
                             "customLabel": "MITRE ATT&CK Techniques",
-                            "field": "threat.technique.id"
+                            "field": "threat.technique.id.keyword"
                         },
                         "schema": "metric",
                         "type": "cardinality"
@@ -1861,7 +1861,7 @@
                 "params": {
                     "controls": [
                         {
-                            "fieldName": "redir.backend.name",
+                            "fieldName": "redir.backend.name.keyword",
                             "id": "1627506187584",
                             "indexPatternRefName": "control_0_index_pattern",
                             "label": "Backend",
@@ -1876,7 +1876,7 @@
                             "type": "list"
                         },
                         {
-                            "fieldName": "source.as.organization.name",
+                            "fieldName": "source.as.organization.name.keyword",
                             "id": "1627507362404",
                             "indexPatternRefName": "control_1_index_pattern",
                             "label": "ASN",
@@ -1891,7 +1891,7 @@
                             "type": "list"
                         },
                         {
-                            "fieldName": "source.geo.country_iso_code",
+                            "fieldName": "source.geo.country_iso_code.keyword",
                             "id": "1627507398459",
                             "indexPatternRefName": "control_2_index_pattern",
                             "label": "Country",
@@ -1906,7 +1906,7 @@
                             "type": "list"
                         },
                         {
-                            "fieldName": "tags",
+                            "fieldName": "tags.keyword",
                             "id": "1627507415074",
                             "indexPatternRefName": "control_3_index_pattern",
                             "label": "Tags",
@@ -2144,7 +2144,7 @@
                         "id": "1",
                         "params": {
                             "customLabel": "Alarmed IP",
-                            "field": "source.ip"
+                            "field": "source.ip.keyword"
                         },
                         "schema": "metric",
                         "type": "cardinality"
@@ -2230,7 +2230,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "host.name",
+                            "field": "host.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -2313,7 +2313,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -2389,7 +2389,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -2732,7 +2732,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "Redirector IP",
-                            "field": "host.ip_ext",
+                            "field": "host.ip_ext.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -2749,7 +2749,7 @@
                         "id": "3",
                         "params": {
                             "customLabel": "Scenario",
-                            "field": "infra.attack_scenario",
+                            "field": "infra.attack_scenario.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -2840,7 +2840,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "TTP",
-                            "field": "threat.technique.id",
+                            "field": "threat.technique.id.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -2916,7 +2916,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -2999,7 +2999,7 @@
                         "enabled": true,
                         "id": "3",
                         "params": {
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -3015,7 +3015,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "host.name",
+                            "field": "host.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -3252,7 +3252,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "signal.rule.threat.technique.name",
+                            "field": "signal.rule.threat.technique.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -3349,7 +3349,7 @@
                         "enabled": true,
                         "id": "3",
                         "params": {
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": true,
                             "missingBucketLabel": "Unknown user",
                             "order": "desc",
@@ -3492,7 +3492,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "Hosts",
-                            "field": "host.name"
+                            "field": "host.name.keyword"
                         },
                         "schema": "metric",
                         "type": "cardinality"
@@ -3661,28 +3661,28 @@
                                 {
                                     "input": {
                                         "language": "kuery",
-                                        "query": "redir.backend.name : c2* and tags : \"iplist_customer\""
+                                        "query": "redir.backend.name.keyword : c2* and tags.keyword : \"iplist_customer\""
                                     },
                                     "label": "C2 traffic - Customer"
                                 },
                                 {
                                     "input": {
                                         "language": "kuery",
-                                        "query": "redir.backend.name : c2* and tags : \"iplist_redteam\" "
+                                        "query": "redir.backend.name.keyword : c2* and tags.keyword : \"iplist_redteam\" "
                                     },
                                     "label": "C2 traffic - Red team tests"
                                 },
                                 {
                                     "input": {
                                         "language": "kuery",
-                                        "query": "redir.backend.name : c2* and not tags: \"iplist_customer\" and not tags : \"iplist_redteam\" "
+                                        "query": "redir.backend.name.keyword : c2* and not tags.keyword: \"iplist_customer\" and not tags.keyword : \"iplist_redteam\" "
                                     },
                                     "label": "C2 traffic - Other"
                                 },
                                 {
                                     "input": {
                                         "language": "kuery",
-                                        "query": "not redir.backend.name : c2*"
+                                        "query": "not redir.backend.name.keyword : c2*"
                                     },
                                     "label": "Non-C2 traffic"
                                 }
@@ -3850,7 +3850,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "Source IP",
-                            "field": "source.ip",
+                            "field": "source.ip.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -3867,7 +3867,7 @@
                         "id": "3",
                         "params": {
                             "customLabel": "AS Organisation",
-                            "field": "source.as.organization.name",
+                            "field": "source.as.organization.name.keyword",
                             "missingBucket": true,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -3884,7 +3884,7 @@
                         "id": "4",
                         "params": {
                             "customLabel": "Country",
-                            "field": "source.geo.country_iso_code",
+                            "field": "source.geo.country_iso_code.keyword",
                             "missingBucket": true,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -4043,7 +4043,7 @@
                 "params": {
                     "controls": [
                         {
-                            "fieldName": "host.name",
+                            "fieldName": "host.name.keyword",
                             "id": "1595867425052",
                             "indexPatternRefName": "control_0_index_pattern",
                             "label": "Target host(s)",
@@ -4058,7 +4058,7 @@
                             "type": "list"
                         },
                         {
-                            "fieldName": "user.name",
+                            "fieldName": "user.name.keyword",
                             "id": "1595867451919",
                             "indexPatternRefName": "control_1_index_pattern",
                             "label": "Target user(s)",
@@ -4138,14 +4138,14 @@
                                 {
                                     "input": {
                                         "language": "kuery",
-                                        "query": "redir.backend.name : c2*"
+                                        "query": "redir.backend.name.keyword : c2*"
                                     },
                                     "label": "C2 traffic"
                                 },
                                 {
                                     "input": {
                                         "language": "kuery",
-                                        "query": "not redir.backend.name : c2*"
+                                        "query": "not redir.backend.name.keyword : c2*"
                                     },
                                     "label": "Non-C2 traffic"
                                 }
@@ -4159,7 +4159,7 @@
                         "id": "3",
                         "params": {
                             "customLabel": "Backend",
-                            "field": "redir.backend.name",
+                            "field": "redir.backend.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -4459,7 +4459,7 @@
                         "id": "1",
                         "params": {
                             "customLabel": "Source IP",
-                            "field": "source.ip"
+                            "field": "source.ip.keyword"
                         },
                         "schema": "metric",
                         "type": "cardinality"
@@ -4470,7 +4470,7 @@
                         "params": {
                             "autoPrecision": true,
                             "customLabel": "",
-                            "field": "source.geo.location",
+                            "field": "source.geo.location.keyword",
                             "isFilteredByCollar": true,
                             "precision": 2,
                             "useGeocentroid": true
@@ -4595,7 +4595,7 @@
                         "id": "2",
                         "params": {
                             "customLabel": "Username",
-                            "field": "user.name",
+                            "field": "user.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -4612,7 +4612,7 @@
                         "id": "3",
                         "params": {
                             "customLabel": "Computername",
-                            "field": "host.name",
+                            "field": "host.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -4789,7 +4789,7 @@
                         "id": "3",
                         "params": {
                             "customLabel": "Alarmed IPs",
-                            "field": "source.ip",
+                            "field": "source.ip.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
@@ -4938,7 +4938,7 @@
                         "enabled": true,
                         "id": "2",
                         "params": {
-                            "field": "signal.rule.threat.tactic.name",
+                            "field": "signal.rule.threat.tactic.name.keyword",
                             "missingBucket": false,
                             "missingBucketLabel": "Missing",
                             "order": "desc",
