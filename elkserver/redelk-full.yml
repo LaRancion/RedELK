@@ -81,7 +81,7 @@ services:
     networks:
       - net
     ports:
-      - "5044:5044"
+      - "127.0.0.1:5044:5044"
     expose:
       - "9600"
     volumes:
