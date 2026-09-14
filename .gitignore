@@ -146,3 +146,7 @@ elkserver/mounts/redelk-config/etc/redelk/rogue_useragents.conf
 elkserver/mounts/redelk-config/etc/redelk/roguedomains.conf
 redirs/filebeat/filebeat.yml
 c2servers/filebeat/filebeat_redelk_main.yml
+
+# ES index templates synced into elasticsearch build context at install time
+# (source of truth is docker/redelk-base/redelkinstalldata/templates/)
+elkserver/docker/redelk-elasticsearch/redelkinstalldata/templates/

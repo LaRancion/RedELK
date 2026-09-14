@@ -776,6 +776,17 @@ if [ $DRYRUN == "no" ]; then
 
     echo "[*] Building RedELK from $DOCKERCONFFILE file. Docker output below." | tee -a $LOGFILE
     echo ""
+
+    # Sync ES index templates + ILM policy into the elasticsearch image build context.
+    # init-elasticsearch.sh installs them before creating the redelk_ingest user, which
+    # closes the race where logstash creates a daily index before the template exists
+    # (causing text/.keyword mapping mismatches that break dashboard aggregations).
+    echo "[*] Syncing ES index templates into elasticsearch build context" | tee -a $LOGFILE
+    mkdir -p ./docker/redelk-elasticsearch/redelkinstalldata/templates >> $LOGFILE 2>&1
+    cp ./docker/redelk-base/redelkinstalldata/templates/redelk_elasticsearch_ilm.json ./docker/redelk-elasticsearch/redelkinstalldata/templates/ >> $LOGFILE 2>&1
+    cp ./docker/redelk-base/redelkinstalldata/templates/redelk_elasticsearch_template_*.json ./docker/redelk-elasticsearch/redelkinstalldata/templates/ >> $LOGFILE 2>&1
+    chown -R 1000 ./docker/redelk-elasticsearch/redelkinstalldata/templates >> $LOGFILE 2>&1
+
     docker-compose -f docker-compose.yml up --build -d # >>$LOGFILE 2>&1
     ERROR=$?
     if [ $ERROR -ne 0 ]; then

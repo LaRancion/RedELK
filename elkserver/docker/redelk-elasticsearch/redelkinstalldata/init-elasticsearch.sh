@@ -27,6 +27,26 @@ while [[ $READY -ne 0 ]]; do
   sleep 1
 done
 
+# Install ILM policy and index templates BEFORE creating the redelk_ingest user.
+# Logstash authenticates as redelk_ingest and creates daily indices (rtops-*, redirtraffic-*,
+# etc.) with manage_template => false. If an index is created before its template exists,
+# ES dynamic-maps string fields (e.g. redir.backend.name) as text + .keyword, permanently
+# breaking aggregations on that index. By installing templates here — before the ingest
+# user exists — we guarantee logstash can never write a document before the templates are
+# in place. This is the only hard ordering guarantee available in the container graph.
+TEMPLATE_DIR="/usr/share/elasticsearch/redelkinstalldata/templates"
+if [[ -d "$TEMPLATE_DIR" ]]; then
+  echo "[*] Installing RedELK ILM policy"
+  curl -X PUT "$ES_URL/_ilm/policy/redelk" --cacert $CERTS_DIR_ES/ca/ca.crt -s -u elastic:$ELASTIC_PASSWORD -H 'Content-Type: application/json' --data-binary @"$TEMPLATE_DIR/redelk_elasticsearch_ilm.json"
+  echo "[*] Installing RedELK index templates"
+  for tf in "$TEMPLATE_DIR"/redelk_elasticsearch_template_*.json; do
+    name=$(basename "$tf" .json | sed 's/redelk_elasticsearch_template_//')
+    curl -X POST "$ES_URL/_template/$name" --cacert $CERTS_DIR_ES/ca/ca.crt -s -u elastic:$ELASTIC_PASSWORD -H 'Content-Type: application/json' --data-binary @"$tf"
+  done
+else
+  echo "[!] RedELK template directory $TEMPLATE_DIR not found — index templates will be installed by redelk-base (race window open)"
+fi
+
 echo "[*] Setting password for user kibana_system"
 curl -XPOST $ES_URL/_security/user/kibana_system/_password --cacert $CERTS_DIR_ES/ca/ca.crt -s -uelastic:$ELASTIC_PASSWORD -H 'Content-Type: application/json' --data "{\"password\":\"$CREDS_kibana_system\"}"
 ERROR=$?

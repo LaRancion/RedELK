@@ -85,13 +85,13 @@ if [ $ERROR -ne 0 ]; then
 fi
 echo "" >>$LOGFILE
 
-# First check if ES and Kibana are up before doing any followup step
+# Install ES templates as a fallback. The primary installation now happens inside
+# the elasticsearch container's init-elasticsearch.sh (before redelk_ingest exists),
+# which closes the race window completely. This re-install is idempotent (POST /_template
+# overwrites) and serves as a safety net if the ES image was built without the templates.
 upcheck_elasticsearch
-upcheck_kibana
 
-# Start with specifcs for elasticsearch
 echo "[*] Installing Elasticsearch ILM policy" | tee -a $LOGFILE
-upcheck_elasticsearch
 $CURL -X PUT "https://redelk-elasticsearch:9200/_ilm/policy/redelk" -H "Content-Type: application/json" -d @./root/redelkinstalldata/templates/redelk_elasticsearch_ilm.json >>$LOGFILE 2>&1
 ERROR=$?
 if [ $ERROR -ne 0 ]; then
@@ -100,7 +100,6 @@ fi
 echo "" >>$LOGFILE
 
 echo "[*] Installing Elasticsearch index templates" | tee -a $LOGFILE
-upcheck_elasticsearch
 for i in ./root/redelkinstalldata/templates/redelk_elasticsearch_template_*.json; do
     name=$(basename $i .json | sed 's/redelk_elasticsearch_template_//')
     $CURL -X POST "https://redelk-elasticsearch:9200/_template/$name" -H "Content-Type: application/json" -d @$i
