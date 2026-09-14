@@ -59,6 +59,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Sync ES index templates into build context
+        run: |
+          mkdir -p elkserver/docker/redelk-elasticsearch/redelkinstalldata/templates
+          cp elkserver/docker/redelk-base/redelkinstalldata/templates/redelk_elasticsearch_ilm.json elkserver/docker/redelk-elasticsearch/redelkinstalldata/templates/
+          cp elkserver/docker/redelk-base/redelkinstalldata/templates/redelk_elasticsearch_template_*.json elkserver/docker/redelk-elasticsearch/redelkinstalldata/templates/
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
