@@ -164,7 +164,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8443:8443"
+      - "127.0.0.1:8443:8443"
     environment:
       - TLS_NGINX_CRT_PATH=${TLS_NGINX_CRT_PATH}
       - TLS_NGINX_KEY_PATH=${TLS_NGINX_KEY_PATH}
@@ -266,8 +266,8 @@ services:
     volumes:
       - bloodhound_data:/data
     ports:
-      - "${NEO4J_WEB_PORT}:7474"
-      - "${NEO4J_DB_PORT}:7687"
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7687:7687"
     environment:
       - NEO4J_AUTH=${NEO4J_AUTH}
       - NEO4J_dbms_memory_heap_initial__size=${NEO4J_dbms_memory_heap_initial__size}
@@ -301,7 +301,7 @@ services:
     environment:
       - bhe_disable_cypher_qc=${bhe_disable_cypher_qc:-false}
     ports:
-      - ${BLOODHOUND_PORT}:8080
+      - "127.0.0.1:8080:8080"
     volumes:
       - ./mounts/bloodhound-config/bloodhound.config.json:/bloodhound.config.json:ro
     depends_on:
